@@ -178,9 +178,14 @@ class EmbyUpcomingMediaSensor(Entity):
                     show["ParentIndexNumber"]
                 )
 
-            # Add summary
+            # Add summary - begrenzen, um HA State Attributes klein zu halten
             if "Overview" in show:
-                card_item["summary"] = show["Overview"]
+                summary = show.get("Overview", "")
+                card_item["summary"] = (
+                    summary[:500] + "…"
+                    if len(summary) > 500
+                    else summary
+                )
                 
             # Add trailer
             if "RemoteTrailers" in show and len(show["RemoteTrailers"]) > 0:
@@ -260,9 +265,14 @@ class EmbyUpcomingMediaSensor(Entity):
                     show.get("CommunityRating", ''),
                 )
 
-            # Add summary
+            # Add summary - begrenzen, um HA State Attributes klein zu halten
             if "Overview" in show:
-                card_item["summary"] = show["Overview"]
+                summary = show.get("Overview", "")
+                card_item["summary"] = (
+                    summary[:500] + "…"
+                    if len(summary) > 500
+                    else summary
+                )
                 
             # Add trailer
             if "RemoteTrailers" in show and len(show["RemoteTrailers"]) > 0:
