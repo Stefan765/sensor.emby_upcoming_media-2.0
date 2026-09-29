@@ -461,7 +461,7 @@ class EmbyUpcomingMediaSensor(Entity):
             return self.handle_tv_show()
         elif self.data[0]["Type"] == "Movie":
             return self.handle_movie()
-        elif self.data[0]["Type"] == "MusicAlbum" or "Audio":
+        elif self.data[0]["Type"] in ("MusicAlbum", "Audio"):
             return self.handle_music()
         else:
             card_json.append(default)
